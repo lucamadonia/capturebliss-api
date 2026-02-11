@@ -17,8 +17,8 @@ import static com.slack.api.model.block.composition.BlockCompositions.markdownTe
 @Service
 @Slf4j
 public class SlackMsgService {
-  private static final String APPSUMO_SUBS_WEBHOOK_URL = "https://hooks.slack.com/services/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";
-  private static final String ENG_OPS_REQ_WEBHOOK_URL = "https://hooks.slack.com/services/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";
+  private static final String APPSUMO_SUBS_WEBHOOK_URL = System.getenv("SLACK_APPSUMO_WEBHOOK_URL") != null ? System.getenv("SLACK_APPSUMO_WEBHOOK_URL") : "";
+  private static final String ENG_OPS_REQ_WEBHOOK_URL = System.getenv("SLACK_ENG_OPS_WEBHOOK_URL") != null ? System.getenv("SLACK_ENG_OPS_WEBHOOK_URL") : "";
   private final ObjectMapper mapper = new ObjectMapper();
   private final Slack client = Slack.getInstance();
 
