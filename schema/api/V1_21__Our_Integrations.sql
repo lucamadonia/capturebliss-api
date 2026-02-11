@@ -1,4 +1,4 @@
-CREATE TABLE fable_tour_app.platform_integrations
+CREATE TABLE capturebliss_app.platform_integrations
 (
     id              BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     created_at      TIMESTAMP    NOT NULL,
@@ -12,7 +12,7 @@ CREATE TABLE fable_tour_app.platform_integrations
 );
 
 
-CREATE TABLE fable_tour_app.tenant_integrations
+CREATE TABLE capturebliss_app.tenant_integrations
 (
     id             BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     created_at     TIMESTAMP    NOT NULL,
@@ -27,4 +27,4 @@ CREATE TABLE fable_tour_app.tenant_integrations
     CONSTRAINT FK_integration_platform_integrations FOREIGN KEY (integration_id) REFERENCES platform_integrations (id)
 );
 
-CREATE INDEX IDX_org_integration ON fable_tour_app.tenant_integrations (org_id);
+CREATE INDEX IDX_org_integration ON capturebliss_app.tenant_integrations (org_id);

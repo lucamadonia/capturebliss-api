@@ -72,7 +72,7 @@ event_with_device_geo_info__should_not_register() {
       "payload": {
         "source": "module_cta",
         "btnTxt": "Book a demo",
-        "url": "https://hello.sharefable.com"
+        "url": "https://hello.capturebliss.com"
       }
     }]
   }' $HOST/v1/la

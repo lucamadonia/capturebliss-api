@@ -4,7 +4,7 @@
     "url": {
       "type": 0,
       "from": "$globalProps.logo",
-      "_val": "https://s3.amazonaws.com/app.sharefable.com/favicon.png"
+      "_val": "https://s3.amazonaws.com/app.capturebliss.com/favicon.png"
     }
   },
   "loader": {

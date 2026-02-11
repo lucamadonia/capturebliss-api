@@ -1,6 +1,6 @@
 {
   "status": "Issued",
-  "cluster": "proxy1.app.sharefable.com",
+  "cluster": "proxy1.app.capturebliss.com",
   "records": [
     {
       "recordType": "CNAME",

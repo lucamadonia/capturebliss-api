@@ -1,4 +1,4 @@
-CREATE TABLE fable_tour_app.house_lead_info
+CREATE TABLE capturebliss_app.house_lead_info
 (
     id            BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     updated_at    TIMESTAMP    NOT NULL,
@@ -6,14 +6,14 @@ CREATE TABLE fable_tour_app.house_lead_info
     org_id        BIGINT UNSIGNED,
     lead_email_id VARCHAR(255) NOT NULL,
 
-    CONSTRAINT FK_house_lead_org_id FOREIGN KEY (org_id) REFERENCES fable_tour_app.org (id)
+    CONSTRAINT FK_house_lead_org_id FOREIGN KEY (org_id) REFERENCES capturebliss_app.org (id)
 );
-CREATE INDEX IDX_lead_info_org_email ON fable_tour_app.house_lead_info (org_id, lead_email_id);
+CREATE INDEX IDX_lead_info_org_email ON capturebliss_app.house_lead_info (org_id, lead_email_id);
 
 -- ----------------------------------------------------------------------------
 -- ----------------------------------------------------------------------------
 
-CREATE TABLE fable_tour_app.lead_info_vendor_mapping
+CREATE TABLE capturebliss_app.lead_info_vendor_mapping
 (
     id            BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     updated_at    TIMESTAMP    NOT NULL,
@@ -23,15 +23,15 @@ CREATE TABLE fable_tour_app.lead_info_vendor_mapping
     info_value    VARCHAR(255) NOT NULL,
     aux_data      JSON,
 
-    CONSTRAINT FK_lead_v_lead FOREIGN KEY (house_lead_id) REFERENCES fable_tour_app.house_lead_info (id)
+    CONSTRAINT FK_lead_v_lead FOREIGN KEY (house_lead_id) REFERENCES capturebliss_app.house_lead_info (id)
 );
-CREATE INDEX IDX_lead_v_lead ON fable_tour_app.lead_info_vendor_mapping (house_lead_id, info_key);
-CREATE INDEX IDX_lead_v_val ON fable_tour_app.lead_info_vendor_mapping (info_key, info_value);
+CREATE INDEX IDX_lead_v_lead ON capturebliss_app.lead_info_vendor_mapping (house_lead_id, info_key);
+CREATE INDEX IDX_lead_v_val ON capturebliss_app.lead_info_vendor_mapping (info_key, info_value);
 
 -- ----------------------------------------------------------------------------
 -- ----------------------------------------------------------------------------
 
-CREATE TABLE fable_tour_app.lead_360
+CREATE TABLE capturebliss_app.lead_360
 (
     id                    BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     updated_at            TIMESTAMP       NOT NULL,
@@ -48,4 +48,4 @@ CREATE TABLE fable_tour_app.lead_360
     CONSTRAINT FK_lead_360_lead_id FOREIGN KEY (house_lead_id) REFERENCES house_lead_info (id)
 );
 
-CREATE INDEX IDX_lead_lead_id ON fable_tour_app.lead_360 (house_lead_id, tour_id);
+CREATE INDEX IDX_lead_lead_id ON capturebliss_app.lead_360 (house_lead_id, tour_id);

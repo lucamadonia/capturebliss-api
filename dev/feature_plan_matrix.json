@@ -166,7 +166,7 @@
         "value": [
           "hubspot",
           "Zapier",
-          "FableWebhook"
+          "CaptureblissWebhook"
         ],
         "plan": "LIFETIME_TIER3"
       },
@@ -175,7 +175,7 @@
         "value": [
           "hubspot",
           "Zapier",
-          "FableWebhook"
+          "CaptureblissWebhook"
         ],
         "plan": "LIFETIME_TIER4"
       },
@@ -184,7 +184,7 @@
         "value": [
           "hubspot",
           "Zapier",
-          "FableWebhook"
+          "CaptureblissWebhook"
         ],
         "plan": "LIFETIME_TIER5"
       },
@@ -192,21 +192,21 @@
         "test": "text",
         "value": [
           "Zapier",
-          "FableWebhook"
+          "CaptureblissWebhook"
         ],
         "plan": "LIFETIME_TIER2"
       },
       {
         "test": "text",
         "value": [
-          "FableWebhook"
+          "CaptureblissWebhook"
         ],
         "plan": "LIFETIME_TIER1"
       },
       {
         "test": "text",
         "value": [
-          "FableWebhook"
+          "CaptureblissWebhook"
         ],
         "plan": "STARTUP"
       },

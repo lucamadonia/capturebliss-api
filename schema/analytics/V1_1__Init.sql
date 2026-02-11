@@ -1,4 +1,4 @@
--- INFO create database fable_analytics inside pg
+-- INFO create database capturebliss_analytics inside pg
 
 -- al -> analytics log where data is stored as event
 CREATE SCHEMA IF NOT EXISTS al;

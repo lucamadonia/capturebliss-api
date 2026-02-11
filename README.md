@@ -1,6 +1,6 @@
-# Fable API Server
+# Capturebliss API Server
 
-Server-side API for Fable, an interactive demo product platform. This repository contains the backend services that power demo creation, management, analytics, and integrations.
+Server-side API for Capturebliss, an interactive demo product platform. This repository contains the backend services that power demo creation, management, analytics, and integrations.
 
 ## Table of Contents
 
@@ -120,8 +120,8 @@ Before you begin, ensure you have the following installed:
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/your-org/fable-api.git
-cd fable-api
+git clone https://github.com/your-org/capturebliss-api.git
+cd capturebliss-api
 ```
 
 ### 2. Set Up Environment Files
@@ -284,7 +284,7 @@ Check Makefile for details.
 api/
 ├── src/
 │   ├── main/
-│   │   ├── java/com/sharefable/
+│   │   ├── java/com/capturebliss/
 │   │   │   ├── Main.java                    # Application entry point
 │   │   │   ├── Routes.java                  # Route definitions
 │   │   │   ├── ApiDataSourceConfig.java     # MySQL datasource config
@@ -518,7 +518,7 @@ Each environment uses its own:
 
 If you encounter any issues or have questions:
 
-- **Issues**: [Open an issue on GitHub](https://github.com/your-org/fable-api/issues)
+- **Issues**: [Open an issue on GitHub](https://github.com/your-org/capturebliss-api/issues)
 
 ## License
 
@@ -526,4 +526,4 @@ This project is licensed under the Apache License 2.0 - see the [LICENSE](LICENS
 
 ---
 
-**Note**: This is the server-side API component of Fable. For the frontend application, see the [fable-app repository](https://github.com/sharefable/app).
+**Note**: This is the server-side API component of Capturebliss. For the frontend application, see the [capturebliss-app repository](https://github.com/capturebliss/app).

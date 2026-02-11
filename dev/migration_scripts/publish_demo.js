@@ -4,7 +4,7 @@ const dbConfig = {
   host: '<>',
   user: '<>',
   password: '<>',
-  database: 'fable_tour_app',
+  database: 'capturebliss_app',
 };
 
 async function connectToDatabase() {
@@ -40,7 +40,7 @@ async function connectToDatabase() {
     console.log('Migrating ', tour.rid);
     let resp;
     try {
-      resp = await fetch('https://api.service.sharefable.com/v1/m/tpub', {
+      resp = await fetch('https://api.service.capturebliss.com/v1/m/tpub', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

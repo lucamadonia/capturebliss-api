@@ -1,4 +1,4 @@
-CREATE TABLE fable_tour_app.logs
+CREATE TABLE capturebliss_app.logs
 (
     id              BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     created_at      TIMESTAMP       NOT NULL,
@@ -10,4 +10,4 @@ CREATE TABLE fable_tour_app.logs
     log_line        JSON
 );
 
-CREATE INDEX IDX_log ON fable_tour_app.logs (org_id, log_type, for_object_type, for_object_id);
+CREATE INDEX IDX_log ON capturebliss_app.logs (org_id, log_type, for_object_type, for_object_id);

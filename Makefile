@@ -6,7 +6,7 @@ teardown:
 	docker compose down;
 
 clean-data:
-	docker rm fable-db; docker rm fable-db-flyway; docker volume rm api_mysql-data
+	docker rm capturebliss-db; docker rm capturebliss-db-flyway; docker volume rm api_mysql-data
 
 setup:
 	docker compose --profile ${APP_ENV} up -d
@@ -77,4 +77,4 @@ container-run:
 	sed -r 's/^export[[:space:]]+//' env.now > env.dkr.tmp
 	sed -r 's/\\#/#/' env.dkr.tmp > env.dkr
 	rm env.dkr.tmp
-	docker rm fa; docker run --name fa --env-file env.dkr -p 8080:8080 fable-api
+	docker rm fa; docker run --name fa --env-file env.dkr -p 8080:8080 capturebliss-api

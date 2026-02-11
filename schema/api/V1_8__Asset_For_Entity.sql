@@ -1,4 +1,4 @@
-CREATE TABLE fable_tour_app.entity_holding
+CREATE TABLE capturebliss_app.entity_holding
 (
     id          BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     created_at  TIMESTAMP NOT NULL,
@@ -8,4 +8,4 @@ CREATE TABLE fable_tour_app.entity_holding
     asset_key   TEXT      NOT NULL,
     info        JSON
 );
-CREATE INDEX IDX_entity_type_entity_key ON fable_tour_app.entity_holding (entity_type, entity_key);
+CREATE INDEX IDX_entity_type_entity_key ON capturebliss_app.entity_holding (entity_type, entity_key);

@@ -8,7 +8,7 @@ const dbConfig = {
     password: '<>',
     database: '<>',
 };
-const bucketName = 'fable-tour-app-gamma';
+const bucketName = 'capturebliss-app-gamma';
 const data = {
     v: 1,
     lastUpdatedAtUtc: -1,

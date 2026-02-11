@@ -1,4 +1,4 @@
-CREATE TABLE fable_tour_app.subscriptions
+CREATE TABLE capturebliss_app.subscriptions
 (
     id                 BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     created_at         TIMESTAMP       NOT NULL,
@@ -16,11 +16,11 @@ CREATE TABLE fable_tour_app.subscriptions
 
     CONSTRAINT FK_org_id FOREIGN KEY (org_id) REFERENCES org (id)
 );
-CREATE INDEX IDX_subscriptions_org_id ON fable_tour_app.subscriptions (org_id);
-CREATE INDEX IDX_subscriptions_id ON fable_tour_app.subscriptions (cb_subscription_id);
+CREATE INDEX IDX_subscriptions_org_id ON capturebliss_app.subscriptions (org_id);
+CREATE INDEX IDX_subscriptions_id ON capturebliss_app.subscriptions (cb_subscription_id);
 
-ALTER TABLE fable_tour_app.user
+ALTER TABLE capturebliss_app.user
     ADD active BOOLEAN DEFAULT TRUE;
 
-DROP INDEX IDX_org ON fable_tour_app.user;
-CREATE INDEX IDX_org_active ON fable_tour_app.user (belongs_to_org, active);
+DROP INDEX IDX_org ON capturebliss_app.user;
+CREATE INDEX IDX_org_active ON capturebliss_app.user (belongs_to_org, active);

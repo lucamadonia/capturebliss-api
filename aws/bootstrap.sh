@@ -25,11 +25,11 @@ sudo ln -s /opt/apache-maven-3.6.3/bin/mvn /usr/local/bin/
 
 # github deploy token
 # https://docs.github.com/en/developers/overview/managing-deploy-keys#deploy-keys
-cd ~/.ssh && ssh-keygen -t ed25519 -C "akash@sharefable.com"
+cd ~/.ssh && ssh-keygen -t ed25519 -C "akash@capturebliss.com"
 # NAME THE FILE AS github
 eval "$(ssh-agent -s)"
 ss-add ~/.ssh/github
-git clone git@github.com:sharefable/api.git
+git clone git@github.com:capturebliss/api.git
 
 # From local inside (${project}/api)
 scp env.dev fab-api:~/api/

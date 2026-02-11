@@ -1,4 +1,4 @@
-CREATE TABLE fable_tour_app.jobs
+CREATE TABLE capturebliss_app.jobs
 (
     id                BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     created_at        TIMESTAMP    NOT NULL,
@@ -9,4 +9,4 @@ CREATE TABLE fable_tour_app.jobs
     failure_reason    TEXT,
     info              JSON
 );
-CREATE UNIQUE INDEX IDX_job_type_job_key ON fable_tour_app.jobs (job_type, job_key);
+CREATE UNIQUE INDEX IDX_job_type_job_key ON capturebliss_app.jobs (job_type, job_key);

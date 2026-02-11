@@ -4,7 +4,7 @@ const dbConfig = {
   host: 'localhost',
   user: 'root',
   password: 'root',
-  database: 'fable_tour_app',
+  database: 'capturebliss_app',
   port: '3306'
 };
 

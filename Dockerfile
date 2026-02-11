@@ -12,6 +12,6 @@ FROM openjdk:17.0.1-jdk-slim
 
 EXPOSE 8080
 
-COPY --from=builder /tmp/api/target/api-*.jar /usr/local/fable/api.jar
-ENTRYPOINT ["java", "-jar", "/usr/local/fable/api.jar"]
+COPY --from=builder /tmp/api/target/api-*.jar /usr/local/capturebliss/api.jar
+ENTRYPOINT ["java", "-jar", "/usr/local/capturebliss/api.jar"]
 

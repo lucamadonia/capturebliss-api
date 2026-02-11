@@ -69,7 +69,7 @@ jobs:
 
       - name: Checking if tag is present in ecr
         run: >
-          if aws ecr describe-images --repository-name fable-api --region ap-southeast-1 --query 'sort_by(imageDetails,& imagePushedAt)[*].imageTags[]' | grep -q ${{ steps.version.outputs.V }}; then
+          if aws ecr describe-images --repository-name capturebliss-api --region ap-southeast-1 --query 'sort_by(imageDetails,& imagePushedAt)[*].imageTags[]' | grep -q ${{ steps.version.outputs.V }}; then
             echo "::error::Image ${{ steps.version.outputs.V }} already present in registry. Update version in pom.xml"; exit 1
           else
             echo "Image not found in registry. Will create a new tag with ${{ steps.version.outputs.V }}"
@@ -188,7 +188,7 @@ jobs:
             						"text": ":aws: ECR",
             						"emoji": true
             					},
-            					"url": "https://ap-southeast-1.console.aws.amazon.com/ecr/repositories/private/556055615522/fable-api?region=ap-southeast-1"
+            					"url": "https://ap-southeast-1.console.aws.amazon.com/ecr/repositories/private/556055615522/capturebliss-api?region=ap-southeast-1"
             				}
             			]
             		},
@@ -228,7 +228,7 @@ jobs:
             						"text": ":aws: ECS Task Definition",
             						"emoji": true
             					},
-            					"url": "https://ap-southeast-1.console.aws.amazon.com/ecs/v2/task-definitions/fable_api-staging?status=ACTIVE&region=ap-southeast-1"
+            					"url": "https://ap-southeast-1.console.aws.amazon.com/ecs/v2/task-definitions/capturebliss_api-staging?status=ACTIVE&region=ap-southeast-1"
             				},
             				{
             					"type": "button",

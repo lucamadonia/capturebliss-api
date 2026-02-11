@@ -1,4 +1,4 @@
-CREATE TABLE fable_tour_app.api_key
+CREATE TABLE capturebliss_app.api_key
 (
     id            BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     org_id        BIGINT UNSIGNED NOT NULL,
@@ -12,5 +12,5 @@ CREATE TABLE fable_tour_app.api_key
     CONSTRAINT FK_api_key_created_by FOREIGN KEY (created_by_id) REFERENCES user (id)
 );
 
-CREATE INDEX IDX_api_key_org_id ON fable_tour_app.api_key (org_id);
-CREATE INDEX IDX_api_key_active_key ON fable_tour_app.api_key (api_key, active);
+CREATE INDEX IDX_api_key_org_id ON capturebliss_app.api_key (org_id);
+CREATE INDEX IDX_api_key_active_key ON capturebliss_app.api_key (api_key, active);

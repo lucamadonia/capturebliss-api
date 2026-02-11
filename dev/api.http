@@ -81,7 +81,7 @@ Content-Type: application/json
 
 {
   "name": "test-screen",
-  "body": "{\"version\":\"2023-01-10\",\"vpd\":{\"h\":-1,\"w\":-1},\"docTree\":{\"type\":1,\"name\":\"html\",\"attrs\":{\"lang\":\"en\",\"fable-stf\":\"0\",\"fable-slf\":\"0\"},\"props\":{},\"chldrn\":[{\"type\":1,\"name\":\"head\",\"attrs\":{\"fable-stf\":\"0\",\"fable-slf\":\"0\"},\"props\":{},\"chldrn\":[{\"type\":8,\"name\":\"#text\",\"attrs\":{},\"props\":{},\"chldrn\":[]},{\"type\":1,\"name\":\"meta\",\"attrs\":{\"charset\":\"UTF-8\",\"fable-stf\":\"0\",\"fable-slf\":\"0\"},\"props\":{},\"chldrn\":[]},{\"type\":8,\"name\":\"#text\",\"attrs\":{},\"props\":{},\"chldrn\":[]},{\"type\":1,\"name\":\"meta\",\"attrs\":{\"http-equiv\":\"X-UA-Compatible\",\"content\":\"IE=edge\",\"fable-stf\":\"0\",\"fable-slf\":\"0\"},\"props\":{},\"chldrn\":[]},{\"type\":8,\"name\":\"#text\",\"attrs\":{},\"props\":{},\"chldrn\":[]},{\"type\":1,\"name\":\"meta\",\"attrs\":{\"name\":\"viewport\",\"content\":\"width=device-width, initial-scale=1.0\",\"fable-stf\":\"0\",\"fable-slf\":\"0\"},\"props\":{},\"chldrn\":[]},{\"type\":8,\"name\":\"#text\",\"attrs\":{},\"props\":{},\"chldrn\":[]},{\"type\":1,\"name\":\"title\",\"attrs\":{\"fable-stf\":\"0\",\"fable-slf\":\"0\"},\"props\":{},\"chldrn\":[{\"type\":3,\"name\":\"#text\",\"attrs\":{},\"props\":{\"textContent\":\"Image iframe\"},\"chldrn\":[]}]},{\"type\":8,\"name\":\"#text\",\"attrs\":{},\"props\":{},\"chldrn\":[]},{\"type\":1,\"name\":\"style\",\"attrs\":{\"fable-stf\":\"0\",\"fable-slf\":\"0\"},\"props\":{\"cssRules\":\"body { margin: 0px; padding: 0px; } #img { width: 100%; height: auto; } \"},\"chldrn\":[]},{\"type\":8,\"name\":\"#text\",\"attrs\":{},\"props\":{},\"chldrn\":[]}]},{\"type\":8,\"name\":\"#text\",\"attrs\":{},\"props\":{},\"chldrn\":[]},{\"type\":1,\"name\":\"body\",\"attrs\":{\"fable-stf\":\"0\",\"fable-slf\":\"0\"},\"props\":{},\"chldrn\":[{\"type\":8,\"name\":\"#text\",\"attrs\":{},\"props\":{},\"chldrn\":[]},{\"type\":1,\"name\":\"img\",\"attrs\":{\"id\":\"img\",\"src\":\"\",\"alt\":\"Image\",\"fable-stf\":\"0\",\"fable-slf\":\"0\"},\"props\":{},\"chldrn\":[]},{\"type\":8,\"name\":\"#text\",\"attrs\":{},\"props\":{},\"chldrn\":[]},{\"type\":8,\"name\":\"#text\",\"attrs\":{},\"props\":{},\"chldrn\":[]},{\"type\":8,\"name\":\"#text\",\"attrs\":{},\"props\":{},\"chldrn\":[]},{\"type\":1,\"name\":\"div\",\"attrs\":{\"id\":\"fable-0-cm-presence\",\"fable-stf\":\"0\",\"fable-slf\":\"0\"},\"props\":{},\"chldrn\":[]},{\"type\":1,\"name\":\"div\",\"attrs\":{\"id\":\"fable-0-de-presence\",\"fable-stf\":\"0\",\"fable-slf\":\"0\"},\"props\":{},\"chldrn\":[]},{\"type\":8,\"name\":\"div\",\"attrs\":{\"style\":\"\\n    \\n    display: flex !important;\\n    background-color: #7567FF !important;\\n    top:-10000px; \\n    left:-10000px;\\n    position: fixed !important;\\n    border-radius: 28px !important;\\n    justify-content: center !important;\\n    align-items: center !important;\\n    padding: 8px 24px !important;\\n    gap: 8px !important;\\n    z-index: 9999999 !important;\\n  \\n    top: 670px !important;\\n    left: 1297px !important;\\n  \",\"class\":\"fable-dont-ser\",\"fable-stf\":\"0\",\"fable-slf\":\"0\"},\"props\":{},\"chldrn\":[]}]}]}}",
+  "body": "{\"version\":\"2023-01-10\",\"vpd\":{\"h\":-1,\"w\":-1},\"docTree\":{\"type\":1,\"name\":\"html\",\"attrs\":{\"lang\":\"en\",\"cb-stf\":\"0\",\"cb-slf\":\"0\"},\"props\":{},\"chldrn\":[{\"type\":1,\"name\":\"head\",\"attrs\":{\"cb-stf\":\"0\",\"cb-slf\":\"0\"},\"props\":{},\"chldrn\":[{\"type\":8,\"name\":\"#text\",\"attrs\":{},\"props\":{},\"chldrn\":[]},{\"type\":1,\"name\":\"meta\",\"attrs\":{\"charset\":\"UTF-8\",\"cb-stf\":\"0\",\"cb-slf\":\"0\"},\"props\":{},\"chldrn\":[]},{\"type\":8,\"name\":\"#text\",\"attrs\":{},\"props\":{},\"chldrn\":[]},{\"type\":1,\"name\":\"meta\",\"attrs\":{\"http-equiv\":\"X-UA-Compatible\",\"content\":\"IE=edge\",\"cb-stf\":\"0\",\"cb-slf\":\"0\"},\"props\":{},\"chldrn\":[]},{\"type\":8,\"name\":\"#text\",\"attrs\":{},\"props\":{},\"chldrn\":[]},{\"type\":1,\"name\":\"meta\",\"attrs\":{\"name\":\"viewport\",\"content\":\"width=device-width, initial-scale=1.0\",\"cb-stf\":\"0\",\"cb-slf\":\"0\"},\"props\":{},\"chldrn\":[]},{\"type\":8,\"name\":\"#text\",\"attrs\":{},\"props\":{},\"chldrn\":[]},{\"type\":1,\"name\":\"title\",\"attrs\":{\"cb-stf\":\"0\",\"cb-slf\":\"0\"},\"props\":{},\"chldrn\":[{\"type\":3,\"name\":\"#text\",\"attrs\":{},\"props\":{\"textContent\":\"Image iframe\"},\"chldrn\":[]}]},{\"type\":8,\"name\":\"#text\",\"attrs\":{},\"props\":{},\"chldrn\":[]},{\"type\":1,\"name\":\"style\",\"attrs\":{\"cb-stf\":\"0\",\"cb-slf\":\"0\"},\"props\":{\"cssRules\":\"body { margin: 0px; padding: 0px; } #img { width: 100%; height: auto; } \"},\"chldrn\":[]},{\"type\":8,\"name\":\"#text\",\"attrs\":{},\"props\":{},\"chldrn\":[]}]},{\"type\":8,\"name\":\"#text\",\"attrs\":{},\"props\":{},\"chldrn\":[]},{\"type\":1,\"name\":\"body\",\"attrs\":{\"cb-stf\":\"0\",\"cb-slf\":\"0\"},\"props\":{},\"chldrn\":[{\"type\":8,\"name\":\"#text\",\"attrs\":{},\"props\":{},\"chldrn\":[]},{\"type\":1,\"name\":\"img\",\"attrs\":{\"id\":\"img\",\"src\":\"\",\"alt\":\"Image\",\"cb-stf\":\"0\",\"cb-slf\":\"0\"},\"props\":{},\"chldrn\":[]},{\"type\":8,\"name\":\"#text\",\"attrs\":{},\"props\":{},\"chldrn\":[]},{\"type\":8,\"name\":\"#text\",\"attrs\":{},\"props\":{},\"chldrn\":[]},{\"type\":8,\"name\":\"#text\",\"attrs\":{},\"props\":{},\"chldrn\":[]},{\"type\":1,\"name\":\"div\",\"attrs\":{\"id\":\"cb-0-cm-presence\",\"cb-stf\":\"0\",\"cb-slf\":\"0\"},\"props\":{},\"chldrn\":[]},{\"type\":1,\"name\":\"div\",\"attrs\":{\"id\":\"cb-0-de-presence\",\"cb-stf\":\"0\",\"cb-slf\":\"0\"},\"props\":{},\"chldrn\":[]},{\"type\":8,\"name\":\"div\",\"attrs\":{\"style\":\"\\n    \\n    display: flex !important;\\n    background-color: #7567FF !important;\\n    top:-10000px; \\n    left:-10000px;\\n    position: fixed !important;\\n    border-radius: 28px !important;\\n    justify-content: center !important;\\n    align-items: center !important;\\n    padding: 8px 24px !important;\\n    gap: 8px !important;\\n    z-index: 9999999 !important;\\n  \\n    top: 670px !important;\\n    left: 1297px !important;\\n  \",\"class\":\"cb-dont-ser\",\"cb-stf\":\"0\",\"cb-slf\":\"0\"},\"props\":{},\"chldrn\":[]}]}]}}",
   "type": "Img",
   "contentType": "image/jpeg"
 }
@@ -209,7 +209,7 @@ Content-Type: application/json
 # {
 #   "status": "Success",
 #   "data": {
-#     "url": "https://fable-tour-app-gamma.s3.ap-south-1.amazonaws.com/akashgoswami/usr/org/1/8cc7a13911ec47beb9981327a9c0e5f6?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20230117T105616Z&X-Amz-SignedHeaders=content-type%3Bhost&X-Amz-Expires=600&X-Amz-Credential=AKIAYC537LARAUFIUQGT%2F20230117%2Fap-south-1%2Fs3%2Faws4_request&X-Amz-Signature=42bea7f664bfc37923aca3df81aa33c23de806bf7a4934fca1b1e481c50225fd",
+#     "url": "https://capturebliss-app-gamma.s3.ap-south-1.amazonaws.com/akashgoswami/usr/org/1/8cc7a13911ec47beb9981327a9c0e5f6?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20230117T105616Z&X-Amz-SignedHeaders=content-type%3Bhost&X-Amz-Expires=600&X-Amz-Credential=AKIAYC537LARAUFIUQGT%2F20230117%2Fap-south-1%2Fs3%2Faws4_request&X-Amz-Signature=42bea7f664bfc37923aca3df81aa33c23de806bf7a4934fca1b1e481c50225fd",
 #     "expiry": "default",
 #     "filename": "8cc7a13911ec47beb9981327a9c0e5f6"
 #    }
@@ -220,7 +220,7 @@ Authorization: {{auth-header}}
 Content-Type: application/json
 
 ### s3
-PUT https://fable-tour-app-gamma.s3.ap-south-1.amazonaws.com/akashgoswami/usr/org/1/8cc7a13911ec47beb9981327a9c0e5f6?
+PUT https://capturebliss-app-gamma.s3.ap-south-1.amazonaws.com/akashgoswami/usr/org/1/8cc7a13911ec47beb9981327a9c0e5f6?
     X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20230117T105616Z&X-Amz-SignedHeaders=content-type%3Bhost&
     X-Amz-Expires=600&X-Amz-Credential=AKIAYC537LARAUFIUQGT%2F20230117%2Fap-south-1%2Fs3%2Faws4_request&
     X-Amz-Signature=42bea7f664bfc37923aca3df81aa33c23de806bf7a4934fca1b1e481c50225fd
@@ -255,7 +255,7 @@ Content-Type: application/json
 
 {
   "rid": "new-tour-ld9v520e24qq1wqe",
-  "editData": "{\"v\": \"2023-01-10\", \"lastUpdatedAtUtc\": -1, \"logo\": { \"url\": \"https://s3.amazonaws.com/app.sharefable.com/favicon.png\"}, \"loader\": { \"url\": \"https://sample.com\", \"type\": \"gif\"}}"
+  "editData": "{\"v\": \"2023-01-10\", \"lastUpdatedAtUtc\": -1, \"logo\": { \"url\": \"https://s3.amazonaws.com/app.capturebliss.com/favicon.png\"}, \"loader\": { \"url\": \"https://sample.com\", \"type\": \"gif\"}}"
 }
 
 ### update edit file of tour
@@ -265,7 +265,7 @@ Content-Type: application/json
 
 {
   "rid": "edits-checl-6aqgcvbve98c1gan",
-  "editData": "{\"v\": \"2023-01-10\", \"lastUpdatedAtUtc\": -1, \"logo\": { \"url\": \"https://s3.amazonaws.com/app.sharefable.com/favicon.png\"}, \"loader\": { \"url\": \"https://sample.com\", \"type\": \"gif\"}}"
+  "editData": "{\"v\": \"2023-01-10\", \"lastUpdatedAtUtc\": -1, \"logo\": { \"url\": \"https://s3.amazonaws.com/app.capturebliss.com/favicon.png\"}, \"loader\": { \"url\": \"https://sample.com\", \"type\": \"gif\"}}"
 }
 
 ### update global opts file
@@ -275,7 +275,7 @@ Content-Type: application/json
 
 {
   "rid": "werr",
-  "editData": "{\"logo\":\"https://s3.amazonaws.com/app.sharefable.com/favicon.png\",\"companyUrl\":\"\",\"bookADemoUrl\":\"\",\"demoLoadingText\":\"Setting up the interactive demo for your org\",\"fontFamily\":\"\",\"primaryColor\":\"#7567ff\",\"ctaSize\":\"medium\",\"annBodyBgColor\":\"#FFFFFF\",\"annBorderColor\":\"#BDBDBD\",\"fontColor\":\"#424242\",\"annBorderRadius\":4,\"annConPad\":\"14 14\",\"selColor\":\"#2196f3\",\"selShape\":\"box\",\"selEffect\":\"regular\",\"showStepNo\":true,\"showWatermark\":true,\"nextBtnText\":\"Next\",\"nextBtnStyle\":\"primary\",\"prevBtnText\":\"Back\",\"prevBtnStyle\":\"primary\",\"customBtn1Text\":\"Book a demo\",\"customBtn1Style\":\"primary\",\"customBtn1URL\":\"\",\"monoIncKey\":1,\"createdAt\":1719227405,\"updatedAt\":1719227405,\"version\":1}"
+  "editData": "{\"logo\":\"https://s3.amazonaws.com/app.capturebliss.com/favicon.png\",\"companyUrl\":\"\",\"bookADemoUrl\":\"\",\"demoLoadingText\":\"Setting up the interactive demo for your org\",\"fontFamily\":\"\",\"primaryColor\":\"#7567ff\",\"ctaSize\":\"medium\",\"annBodyBgColor\":\"#FFFFFF\",\"annBorderColor\":\"#BDBDBD\",\"fontColor\":\"#424242\",\"annBorderRadius\":4,\"annConPad\":\"14 14\",\"selColor\":\"#2196f3\",\"selShape\":\"box\",\"selEffect\":\"regular\",\"showStepNo\":true,\"showWatermark\":true,\"nextBtnText\":\"Next\",\"nextBtnStyle\":\"primary\",\"prevBtnText\":\"Back\",\"prevBtnStyle\":\"primary\",\"customBtn1Text\":\"Book a demo\",\"customBtn1Style\":\"primary\",\"customBtn1URL\":\"\",\"monoIncKey\":1,\"createdAt\":1719227405,\"updatedAt\":1719227405,\"version\":1}"
 }
 
 ### video transcoding
@@ -283,7 +283,7 @@ POST {{api-host}}/v1/f/vdt
 Content-Type: application/json
 
 {
-  "path": "https://fable-tour-app-gamma.s3.ap-south-1.amazonaws.com/akashgoswami/job_test/8b892ccba9b445559f93e30d77a6161e",
+  "path": "https://capturebliss-app-gamma.s3.ap-south-1.amazonaws.com/akashgoswami/job_test/8b892ccba9b445559f93e30d77a6161e",
   "assn": {
     "entityRid": "untitled-zq5chiy51agttmh0",
     "entityType": 1
@@ -295,7 +295,7 @@ POST {{api-host}}/v1/f/rzeimg
 Content-Type: application/json
 
 {
-  "path": "https://fable-tour-app-gamma.s3.ap-south-1.amazonaws.com/akashgoswami/job_test/test_img_3.png",
+  "path": "https://capturebliss-app-gamma.s3.ap-south-1.amazonaws.com/akashgoswami/job_test/test_img_3.png",
   "assn": {
     "entityRid": "untitled-zq5chiy51agttmh0",
     "entityType": 1
@@ -305,7 +305,7 @@ Content-Type: application/json
 ### log user events
 # stress test ab -p body.json -T application/json  -c 100 -n 2000 http://localhost:8080/v1/lue
 # save the following payload in body.json
-POST https://api.service.staging.sharefable.com/v1/lue?sub=YW5uX2J0bl9jbGlja2Vk
+POST https://api.service.staging.capturebliss.com/v1/lue?sub=YW5uX2J0bl9jbGlja2Vk
 Content-Type: application/json
 
 {
@@ -548,7 +548,7 @@ POST {{api-host}}/v1/tenant_integration
 Content-Type: application/json
 
 {
-  "integrationType": "fable-webhook",
+  "integrationType": "capturebliss-webhook",
   "event": "",
   "tenantIntegrationId": 1,
   "tenantConfig": {
@@ -624,7 +624,7 @@ POST http://localhost:8080/v1/m/cpytrdifforg
 Content-Type: application/json
 
 {
-  "email": "sid@sharefable.com",
+  "email": "sid@capturebliss.com",
   "orgId": 2063,
   "rids": [
     "free-webinar-registrat-q6omxyaiarmuu84c"
@@ -655,7 +655,7 @@ Authorization: {{auth-header}}
 
 
 ### embedly
-GET {{api-host}}/v1/vr/embdly/embed?url=https%3A%2F%2Fapp.sharefable.com%2Flive%2Fdemo%2Fgcal-demo-3mfa0nl5v6pqz6ro&
+GET {{api-host}}/v1/vr/embdly/embed?url=https%3A%2F%2Fapp.capturebliss.com%2Flive%2Fdemo%2Fgcal-demo-3mfa0nl5v6pqz6ro&
     format=json
 Content-Type: application/json
 

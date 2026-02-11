@@ -1,4 +1,4 @@
-CREATE TABLE fable_tour_app.entity_config_kv
+CREATE TABLE capturebliss_app.entity_config_kv
 (
     id          BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     created_at  TIMESTAMP       NOT NULL,
@@ -10,4 +10,4 @@ CREATE TABLE fable_tour_app.entity_config_kv
     config_val  JSON
 );
 
-CREATE INDEX IDX_entity_config_key ON fable_tour_app.entity_config_kv (entity_type, entity_id, config_type, config_key);
+CREATE INDEX IDX_entity_config_key ON capturebliss_app.entity_config_kv (entity_type, entity_id, config_type, config_key);

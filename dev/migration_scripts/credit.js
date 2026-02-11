@@ -4,7 +4,7 @@ const dbConfig = {
   host: 'localhost',
   user: 'root',
   password: 'root',
-  database: 'fable_tour_app',
+  database: 'capturebliss_app',
   port: '3306'
 };
 
@@ -24,7 +24,7 @@ async function connectToDatabase() {
   });
 }
 
-const ENDPOINT = (orgId) => `http://localhost:8080/v1/ide/refill_fable_credit/${orgId}`;
+const ENDPOINT = (orgId) => `http://localhost:8080/v1/ide/refill_capturebliss_credit/${orgId}`;
 
 async function processAllData() {
   const errs = [];

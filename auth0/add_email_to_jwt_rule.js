@@ -5,7 +5,7 @@
 function addEmailToAccessToken(user, context, callback) {
   // This rule adds the authenticated user's email address to the access token.
 
-  var namespace = 'https://identity.sharefable.com/user';
+  var namespace = 'https://identity.capturebliss.com/user';
   context.accessToken[namespace] = {
     familyName: user.family_name || '',
     givenName: user.given_name || '',

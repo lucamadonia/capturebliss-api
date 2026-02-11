@@ -1,4 +1,4 @@
-CREATE TABLE fable_tour_app.analytics_tour_metrics
+CREATE TABLE capturebliss_app.analytics_tour_metrics
 (
     id                  BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     created_at          TIMESTAMP    NOT NULL,
@@ -10,9 +10,9 @@ CREATE TABLE fable_tour_app.analytics_tour_metrics
     views_all           BIGINT UNSIGNED DEFAULT 0
 );
 
-CREATE INDEX IDX_tour_id ON fable_tour_app.analytics_tour_metrics (tour_id);
+CREATE INDEX IDX_tour_id ON capturebliss_app.analytics_tour_metrics (tour_id);
 
-CREATE TABLE fable_tour_app.analytics_tour_ann_clicks
+CREATE TABLE capturebliss_app.analytics_tour_ann_clicks
 (
     id                  BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     created_at          TIMESTAMP       NOT NULL,
@@ -27,10 +27,10 @@ CREATE TABLE fable_tour_app.analytics_tour_ann_clicks
     -- [p1, p5, p10, p25, p50, p75, p90, p95, p99]
 );
 
-CREATE INDEX IDX_tour_id ON fable_tour_app.analytics_tour_ann_clicks (tour_id);
+CREATE INDEX IDX_tour_id ON capturebliss_app.analytics_tour_ann_clicks (tour_id);
 
 
-CREATE TABLE fable_tour_app.analytics_conversion
+CREATE TABLE capturebliss_app.analytics_conversion
 (
     id                  BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     created_at          TIMESTAMP       NOT NULL,
@@ -41,4 +41,4 @@ CREATE TABLE fable_tour_app.analytics_conversion
     btn_id              varchar(255)    NOT NULL,
     clicks              BIGINT UNSIGNED DEFAULT 0
 );
-CREATE INDEX IDX_tour_id ON fable_tour_app.analytics_conversion (tour_id);
+CREATE INDEX IDX_tour_id ON capturebliss_app.analytics_conversion (tour_id);

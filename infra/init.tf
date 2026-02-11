@@ -8,7 +8,7 @@ terraform {
 
   backend "s3" {
     bucket = "pvt-mics"
-    key    = "tf-states/fable_api"
+    key    = "tf-states/capturebliss_api"
     region = "ap-south-1"
   }
 }
@@ -26,5 +26,5 @@ locals {
 
 provider "aws" {
   region  = local.region
-  profile = "fable"
+  profile = "capturebliss"
 }

@@ -1,9 +1,9 @@
-CREATE DATABASE IF NOT EXISTS fable_tour_app;
+CREATE DATABASE IF NOT EXISTS capturebliss_app;
 
 -- ----------------------------------------------------------------------------
 -- ----------------------------------------------------------------------------
 
-CREATE TABLE fable_tour_app.asset_proxy
+CREATE TABLE capturebliss_app.asset_proxy
 (
     id              BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     created_at      TIMESTAMP    NOT NULL,
@@ -14,12 +14,12 @@ CREATE TABLE fable_tour_app.asset_proxy
     http_status     INT          NOT NULL
 );
 
-CREATE INDEX IDX_rid ON fable_tour_app.asset_proxy (rid);
+CREATE INDEX IDX_rid ON capturebliss_app.asset_proxy (rid);
 
 -- ----------------------------------------------------------------------------
 -- ----------------------------------------------------------------------------
 
-CREATE TABLE fable_tour_app.org
+CREATE TABLE capturebliss_app.org
 (
     id           BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     rid          VARCHAR(255) NOT NULL UNIQUE,
@@ -29,12 +29,12 @@ CREATE TABLE fable_tour_app.org
     thumbnail    VARCHAR(200) NULL
 );
 
-CREATE INDEX IDX_org ON fable_tour_app.org (rid);
+CREATE INDEX IDX_org ON capturebliss_app.org (rid);
 
 -- ----------------------------------------------------------------------------
 -- ----------------------------------------------------------------------------
 
-CREATE TABLE fable_tour_app.user
+CREATE TABLE capturebliss_app.user
 (
     id             BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     first_name     VARCHAR(100)    NOT NULL,
@@ -48,13 +48,13 @@ CREATE TABLE fable_tour_app.user
     CONSTRAINT FK_user_belongs_to_org FOREIGN KEY (belongs_to_org) REFERENCES org (id)
 );
 
-CREATE INDEX IDX_email ON fable_tour_app.user (email);
-CREATE INDEX IDX_org ON fable_tour_app.user (belongs_to_org);
+CREATE INDEX IDX_email ON capturebliss_app.user (email);
+CREATE INDEX IDX_org ON capturebliss_app.user (belongs_to_org);
 
 -- ----------------------------------------------------------------------------
 -- ----------------------------------------------------------------------------
 
-CREATE TABLE fable_tour_app.screen
+CREATE TABLE capturebliss_app.screen
 (
     id                BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     rid               VARCHAR(255)    NOT NULL UNIQUE,
@@ -72,13 +72,13 @@ CREATE TABLE fable_tour_app.screen
     CONSTRAINT FK_screen_created_by_user FOREIGN KEY (created_by) REFERENCES user (id)
 );
 
-CREATE INDEX IDX_org ON fable_tour_app.screen (belongs_to_org);
-CREATE INDEX IDX_rid ON fable_tour_app.screen (rid);
+CREATE INDEX IDX_org ON capturebliss_app.screen (belongs_to_org);
+CREATE INDEX IDX_rid ON capturebliss_app.screen (rid);
 
 -- ----------------------------------------------------------------------------
 -- ----------------------------------------------------------------------------
 
-CREATE TABLE fable_tour_app.tour
+CREATE TABLE capturebliss_app.tour
 (
     id                BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     rid               VARCHAR(255)    NOT NULL UNIQUE,
@@ -93,13 +93,13 @@ CREATE TABLE fable_tour_app.tour
     CONSTRAINT FK_tour_created_by_user FOREIGN KEY (created_by) REFERENCES user (id)
 );
 
-CREATE INDEX IDX_org ON fable_tour_app.tour (belongs_to_org);
-CREATE INDEX IDX_rid ON fable_tour_app.tour (rid);
+CREATE INDEX IDX_org ON capturebliss_app.tour (belongs_to_org);
+CREATE INDEX IDX_rid ON capturebliss_app.tour (rid);
 
 -- ----------------------------------------------------------------------------
 -- ----------------------------------------------------------------------------
 
-CREATE TABLE fable_tour_app.screens_tours_join
+CREATE TABLE capturebliss_app.screens_tours_join
 (
     id         BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     screen_id  BIGINT UNSIGNED NULL,
@@ -110,5 +110,5 @@ CREATE TABLE fable_tour_app.screens_tours_join
     CONSTRAINT FK_tour_id FOREIGN KEY (tour_id) REFERENCES tour (id)
 );
 
-CREATE INDEX IDX_join_screen_id ON fable_tour_app.screens_tours_join (screen_id);
-CREATE INDEX IDX_join_tour_id ON fable_tour_app.screens_tours_join (tour_id);
+CREATE INDEX IDX_join_screen_id ON capturebliss_app.screens_tours_join (screen_id);
+CREATE INDEX IDX_join_tour_id ON capturebliss_app.screens_tours_join (tour_id);

@@ -8,11 +8,11 @@
     <version>3.0.8</version>
     <relativePath/>
   </parent>
-  <groupId>com.sharefable</groupId>
+  <groupId>com.capturebliss</groupId>
   <artifactId>api</artifactId>
   <version>1.3.29</version>
   <name>api</name>
-  <description>Fable API server</description>
+  <description>Capturebliss API server</description>
 
   <properties>
     <java.version>17</java.version>
@@ -208,8 +208,8 @@
         </executions>
         <configuration>
           <jsonLibrary>jackson2</jsonLibrary>
-          <classesWithAnnotations>com.sharefable.api.transport.GenerateTSDef</classesWithAnnotations>
-          <optionalAnnotations>com.sharefable.api.transport.OptionalPropInTS</optionalAnnotations>
+          <classesWithAnnotations>com.capturebliss.api.transport.GenerateTSDef</classesWithAnnotations>
+          <optionalAnnotations>com.capturebliss.api.transport.OptionalPropInTS</optionalAnnotations>
           <outputKind>module</outputKind>
           <outputFile>gen/api-contract.d.ts</outputFile>
           <mapEnum>asEnum</mapEnum>

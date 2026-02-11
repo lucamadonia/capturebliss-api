@@ -1,4 +1,4 @@
-CREATE TABLE fable_tour_app.llm_ops
+CREATE TABLE capturebliss_app.llm_ops
 (
   id         BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
   created_at TIMESTAMP       NOT NULL,
@@ -11,4 +11,4 @@ CREATE TABLE fable_tour_app.llm_ops
   meta       JSON
 );
 
-CREATE INDEX IDX_entity_config_kv_thread ON fable_tour_app.llm_ops (org_id, thread_id);
+CREATE INDEX IDX_entity_config_kv_thread ON capturebliss_app.llm_ops (org_id, thread_id);

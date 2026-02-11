@@ -1,3 +1,3 @@
-ALTER TABLE fable_tour_app.user
+ALTER TABLE capturebliss_app.user
     MODIFY avatar TEXT;
 

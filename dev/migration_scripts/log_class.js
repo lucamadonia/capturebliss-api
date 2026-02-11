@@ -42,7 +42,7 @@ async function connectToDatabase() {
   for (const batch of batches) {
     console.log('Processing batch', `${++i}/${batches.length}`);
     await Promise.all(batch.map(async (tour) => {
-      await fetch(`https://api.service.sharefable.com/v1/repub/entity/rid/${tour.rid}`);
+      await fetch(`https://api.service.capturebliss.com/v1/repub/entity/rid/${tour.rid}`);
     }));
   }
   console.log('~~~ Completed');

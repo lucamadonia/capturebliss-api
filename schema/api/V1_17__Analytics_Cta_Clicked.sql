@@ -1,4 +1,4 @@
-CREATE TABLE fable_tour_app.analytics_cta_clicked
+CREATE TABLE capturebliss_app.analytics_cta_clicked
 (
     id                  BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     created_at          TIMESTAMP    NOT NULL,
@@ -15,4 +15,4 @@ CREATE TABLE fable_tour_app.analytics_cta_clicked
     url                 VARCHAR(255)  NOT NULL
 );
 
-CREATE INDEX IDX_tour_id_aid_email ON fable_tour_app.analytics_cta_clicked(tour_id, aid, email);
+CREATE INDEX IDX_tour_id_aid_email ON capturebliss_app.analytics_cta_clicked(tour_id, aid, email);

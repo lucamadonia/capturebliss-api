@@ -1,2 +1,2 @@
-ALTER TABLE fable_tour_app.user
+ALTER TABLE capturebliss_app.user
     ADD UNIQUE (email);
