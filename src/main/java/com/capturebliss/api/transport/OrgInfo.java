@@ -21,4 +21,6 @@ public class OrgInfo {
   private String othersText;
   @OptionalPropInTS
   private Object bet; // bet -> [b]ack[e]nd [t]ransparent config; only used in client side
+  @OptionalPropInTS
+  private WhiteLabelConfig whiteLabel; // White-label branding configuration per tenant
 }
