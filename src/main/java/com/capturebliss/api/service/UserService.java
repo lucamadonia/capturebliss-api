@@ -129,12 +129,18 @@ public class UserService {
       throw new IllegalStateException("Can't create user");
     }
 
+    String firstName = StringUtils.substring(user.givenName, 0, 49);
+    String lastName = StringUtils.substring(user.familyName, 0, 49);
+    if (StringUtils.isBlank(firstName)) {
+      firstName = StringUtils.substringBefore(user.email(), "@");
+    }
+
     User newUser = User.builder()
       .email(user.email())
       .avatar(user.picture())
       .authId(authId)
-      .firstName(StringUtils.substring(user.givenName, 0, 49))
-      .lastName(StringUtils.substring(user.familyName, 0, 49))
+      .firstName(firstName)
+      .lastName(StringUtils.defaultIfBlank(lastName, ""))
       .domainBlacklisted(!isWorkEmail)
       .active(true)
       .build();
