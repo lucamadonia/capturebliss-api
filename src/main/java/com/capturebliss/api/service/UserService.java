@@ -9,16 +9,20 @@ import com.capturebliss.api.entity.Org;
 import com.capturebliss.api.entity.User;
 import com.capturebliss.api.repo.UserRepo;
 import com.capturebliss.api.transport.NfEvents;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.javatuples.Pair;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -27,13 +31,21 @@ import java.util.Set;
 @Slf4j
 @Service
 @Qualifier("userService")
-@RequiredArgsConstructor
 public class UserService {
   private final UserRepo userRepo;
   private final NfHookService nfHookService;
   private final SubscriptionService subService;
 
+  @Value("${spring.security.oauth2.resourceserver.jwt.issuer-uri}")
+  private String issuerUri;
+
   ObjectMapper objectMapper = new ObjectMapper();
+
+  public UserService(UserRepo userRepo, NfHookService nfHookService, SubscriptionService subService) {
+    this.userRepo = userRepo;
+    this.nfHookService = nfHookService;
+    this.subService = subService;
+  }
 
   // used from AuthUser annotation
   public User getOrCreateUserFromJwt(Jwt jwt) throws JsonProcessingException {
@@ -65,17 +77,38 @@ public class UserService {
     Map<String, Object> claims = jwt.getClaims();
     Object userDetailsClaim = claims.get("https://identity.capturebliss.com/user");
     if (userDetailsClaim == null) {
-      String email = (String) claims.get("email");
-      String picture = (String) claims.get("picture");
-      String givenName = (String) claims.get("given_name");
-      String familyName = (String) claims.get("family_name");
-      if (email == null) {
-        email = jwt.getSubject();
-      }
-      return new UserClaimFromAuth0(picture, email, familyName, givenName);
+      log.warn("Custom claim missing from JWT, falling back to userinfo endpoint");
+      return getUserClaimsFromUserInfoEndpoint(jwt);
     }
     String userDetailsClaimStr = objectMapper.writeValueAsString(userDetailsClaim);
     return objectMapper.readValue(userDetailsClaimStr, UserClaimFromAuth0.class);
+  }
+
+  private UserClaimFromAuth0 getUserClaimsFromUserInfoEndpoint(Jwt jwt) {
+    try {
+      String userinfoUrl = issuerUri + (issuerUri.endsWith("/") ? "" : "/") + "userinfo";
+      HttpClient client = HttpClient.newHttpClient();
+      HttpRequest request = HttpRequest.newBuilder()
+        .uri(URI.create(userinfoUrl))
+        .header("Authorization", "Bearer " + jwt.getTokenValue())
+        .GET()
+        .build();
+      HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+      if (response.statusCode() == 200) {
+        Map<String, Object> userInfo = objectMapper.readValue(response.body(), Map.class);
+        String email = (String) userInfo.get("email");
+        String picture = (String) userInfo.get("picture");
+        String givenName = (String) userInfo.get("given_name");
+        String familyName = (String) userInfo.get("family_name");
+        log.info("Got user info from userinfo endpoint: email={}", email);
+        return new UserClaimFromAuth0(picture, email, familyName, givenName);
+      } else {
+        log.error("Failed to get userinfo: status={}, body={}", response.statusCode(), response.body());
+      }
+    } catch (Exception e) {
+      log.error("Error calling userinfo endpoint", e);
+    }
+    return new UserClaimFromAuth0(null, jwt.getSubject(), null, null);
   }
 
   User setUserActiveOrInactive(User user, Boolean isActive) {
