@@ -175,6 +175,26 @@ public class SubscriptionService {
       }
     }
 
+    if (!paymentConfig.isConfigured()) {
+      // Chargebee not configured - create local trial subscription
+      log.info("Creating local trial subscription for user {} (Chargebee not configured)", user.getEmail());
+      Subscription subs = Subscription.builder()
+        .paymentPlanId(planId)
+        .paymentPlan(info.pricingPlan())
+        .paymentInterval(info.pricingInterval())
+        .cbSubscriptionId("local-" + org.getId())
+        .trialEndsOn(java.sql.Timestamp.from(java.time.Instant.now().plus(java.time.Duration.ofDays(14))))
+        .trialStartedOn(java.sql.Timestamp.from(java.time.Instant.now()))
+        .managedBy(SubscriptionManagedBy.CHARGEBEE)
+        .status(com.chargebee.models.Subscription.Status.IN_TRIAL)
+        .orgId(org.getId())
+        .cbCustomerId("local-" + user.getId())
+        .build();
+      repo.save(subs);
+      entityConfigKVS = setCreditsForOrg(subs, 1);
+      return RespSubscription.from(subs, entityConfigKVS);
+    }
+
     try {
       final int numberOfMembersInOrg = orgService.getCountOfActiveUsersInOrg(org.getId());
 

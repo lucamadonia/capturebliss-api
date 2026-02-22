@@ -81,7 +81,16 @@ public class PaymentConfig {
 
   @PostConstruct
   public void configure() {
-    Environment.configure(cbSiteName, cbApiKey);
+    if (StringUtils.isNotBlank(cbSiteName) && StringUtils.isNotBlank(cbApiKey)) {
+      Environment.configure(cbSiteName, cbApiKey);
+      log.info("Chargebee configured with site: {}", cbSiteName);
+    } else {
+      log.warn("Chargebee not configured (CB_SITE_NAME or CB_API_KEY empty). Payment features disabled.");
+    }
+  }
+
+  public boolean isConfigured() {
+    return StringUtils.isNotBlank(cbSiteName) && StringUtils.isNotBlank(cbApiKey);
   }
 
   public String getPlanId(PaymentTerms.Plan plan, PaymentTerms.Interval interval) {
