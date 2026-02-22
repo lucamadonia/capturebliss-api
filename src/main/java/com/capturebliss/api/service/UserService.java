@@ -64,6 +64,16 @@ public class UserService {
   public UserClaimFromAuth0 getUserClaimsFromAuth0(Jwt jwt) throws JsonProcessingException {
     Map<String, Object> claims = jwt.getClaims();
     Object userDetailsClaim = claims.get("https://identity.capturebliss.com/user");
+    if (userDetailsClaim == null) {
+      String email = (String) claims.get("email");
+      String picture = (String) claims.get("picture");
+      String givenName = (String) claims.get("given_name");
+      String familyName = (String) claims.get("family_name");
+      if (email == null) {
+        email = jwt.getSubject();
+      }
+      return new UserClaimFromAuth0(picture, email, familyName, givenName);
+    }
     String userDetailsClaimStr = objectMapper.writeValueAsString(userDetailsClaim);
     return objectMapper.readValue(userDetailsClaimStr, UserClaimFromAuth0.class);
   }

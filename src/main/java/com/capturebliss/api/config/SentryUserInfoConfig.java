@@ -24,7 +24,9 @@ public class SentryUserInfoConfig implements SentryUserProvider {
       Jwt jwt = (Jwt) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
       try {
         UserService.UserClaimFromAuth0 captureblissUser = userService.getUserClaimsFromAuth0(jwt);
-        sentryUser.setEmail(captureblissUser.email());
+        if (captureblissUser != null && captureblissUser.email() != null) {
+          sentryUser.setEmail(captureblissUser.email());
+        }
         return sentryUser;
       } catch (JsonProcessingException e) {
         log.error("Error while sending user to sentry");
