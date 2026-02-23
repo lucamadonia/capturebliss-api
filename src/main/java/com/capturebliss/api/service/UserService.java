@@ -73,11 +73,10 @@ public class UserService {
       .orElseGet(() -> createNewUser(userClaimFromAuth0, subject));
 
     if (!StringUtils.equalsIgnoreCase(user.getAuthId(), subject)) {
-      log.error("{} is trying to login using subject {} but subject already exists {}",
-        user.getEmail(), user.getAuthId(), subject);
-      throw new ResponseStatusException(HttpStatus.FORBIDDEN, objectMapper.writeValueAsString(
-        Map.of("r", UnauthorizedReason.EmailIdExistsButLoginMethodDoesNotMatch)
-      ));
+      // Auth ID mismatch - update to new Auth0 subject (happens after Auth0 tenant change)
+      log.warn("Updating authId for {} from {} to {}", user.getEmail(), user.getAuthId(), subject);
+      user.setAuthId(subject);
+      user = userRepo.save(user);
     }
 
     Long orgId = OrgContext.getCurrentOrgId();
