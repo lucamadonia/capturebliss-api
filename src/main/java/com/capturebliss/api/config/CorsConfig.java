@@ -15,14 +15,9 @@ public class CorsConfig implements WebMvcConfigurer {
   public void addCorsMappings(CorsRegistry registry) {
     // allow cors for all path for localhost and staging at this point in time
     registry.addMapping("/**")
-//            .allowedOrigins(
-//                "http://localhost:3000",
-//                "https://app-staging.capturebliss.com",
-//                "https://app.capturebliss.com",
-//                "chrome-extension://**"
-//            )
       .allowedOrigins("*")
-      .allowedMethods("GET", "POST")
+      .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
+      .allowedHeaders("Authorization", "Content-Type", "X-Id-Token", "Accept")
       .allowCredentials(false)
       .maxAge(3600);
   }

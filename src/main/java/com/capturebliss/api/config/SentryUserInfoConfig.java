@@ -20,18 +20,24 @@ public class SentryUserInfoConfig implements SentryUserProvider {
 
   public User provideUser() {
     User sentryUser = new User();
-    if (SecurityContextHolder.getContext().getAuthentication().getPrincipal() instanceof Jwt) {
-      Jwt jwt = (Jwt) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-      try {
-        UserService.UserClaimFromAuth0 captureblissUser = userService.getUserClaimsFromAuth0(jwt);
-        if (captureblissUser != null && captureblissUser.email() != null) {
-          sentryUser.setEmail(captureblissUser.email());
+    try {
+      var auth = SecurityContextHolder.getContext().getAuthentication();
+      if (auth != null && auth.getPrincipal() instanceof Jwt jwt) {
+        // Only set email from custom claim if available, don't trigger fallback chain
+        var claims = jwt.getClaims();
+        Object userDetailsClaim = claims.get("https://identity.capturebliss.com/user");
+        if (userDetailsClaim != null) {
+          String claimStr = new com.fasterxml.jackson.databind.ObjectMapper().writeValueAsString(userDetailsClaim);
+          UserService.UserClaimFromAuth0 captureblissUser = new com.fasterxml.jackson.databind.ObjectMapper()
+            .readValue(claimStr, UserService.UserClaimFromAuth0.class);
+          if (captureblissUser != null && captureblissUser.email() != null) {
+            sentryUser.setEmail(captureblissUser.email());
+          }
         }
         return sentryUser;
-      } catch (JsonProcessingException e) {
-        log.error("Error while sending user to sentry");
-        e.printStackTrace();
       }
+    } catch (Exception e) {
+      log.warn("Could not set Sentry user info: {}", e.getMessage());
     }
     return null;
   }
