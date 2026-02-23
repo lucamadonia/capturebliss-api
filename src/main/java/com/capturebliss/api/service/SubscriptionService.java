@@ -95,7 +95,16 @@ public class SubscriptionService {
     Subscription subs = pair.getValue0();
     List<EntityConfigKV> entityConfigKVS = pair.getValue1();
 
-    if (subs == null) return null;
+    if (subs == null) {
+      if (!paymentConfig.isConfigured()) {
+        log.info("Auto-creating local trial subscription for user {} (no subscription found, Chargebee not configured)", user.getEmail());
+        return newSubscription(
+          new ReqSubscriptionInfo(PaymentTerms.Plan.SOLO, PaymentTerms.Interval.YEARLY, null),
+          user
+        );
+      }
+      return null;
+    }
     return RespSubscription.from(subs, entityConfigKVS);
   }
 
