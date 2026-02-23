@@ -19,6 +19,12 @@ import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import com.nimbusds.jwt.JWTClaimsSet;
+import com.nimbusds.jwt.SignedJWT;
+import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
+
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
@@ -128,7 +134,13 @@ public class UserService {
       log.error("Error calling userinfo endpoint", e);
     }
 
-    // Third: check if sub looks like an email (e.g. passwordless or some social providers)
+    // Third: try ID token from X-Id-Token header (sent by frontend)
+    UserClaimFromAuth0 fromIdToken = getUserClaimsFromIdTokenHeader(jwt);
+    if (fromIdToken != null) {
+      return fromIdToken;
+    }
+
+    // Fourth: check if sub looks like an email (e.g. passwordless or some social providers)
     String sub = jwt.getSubject();
     if (sub != null && sub.contains("@")) {
       log.info("Using JWT subject as email: {}", sub);
@@ -136,10 +148,44 @@ public class UserService {
     }
 
     // Cannot determine user email - throw clear error instead of using auth0|xxx as email
-    log.error("Cannot determine user email. Custom claim missing, /userinfo failed, sub={}. " +
+    log.error("Cannot determine user email. Custom claim missing, /userinfo failed, no ID token header, sub={}. " +
       "Ensure Auth0 Post-Login Action adds the custom claim to access tokens.", sub);
     throw new ResponseStatusException(HttpStatus.UNAUTHORIZED,
       "Cannot determine user identity. Please logout and login again.");
+  }
+
+  private UserClaimFromAuth0 getUserClaimsFromIdTokenHeader(Jwt accessTokenJwt) {
+    try {
+      ServletRequestAttributes attrs = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+      if (attrs == null) return null;
+
+      HttpServletRequest request = attrs.getRequest();
+      String idToken = request.getHeader("X-Id-Token");
+      if (idToken == null || idToken.isBlank()) return null;
+
+      SignedJWT signedJWT = SignedJWT.parse(idToken);
+      JWTClaimsSet claims = signedJWT.getJWTClaimsSet();
+
+      // Verify sub matches access token to prevent spoofing
+      String idTokenSub = claims.getSubject();
+      if (!accessTokenJwt.getSubject().equals(idTokenSub)) {
+        log.error("ID token sub {} doesn't match access token sub {}", idTokenSub, accessTokenJwt.getSubject());
+        return null;
+      }
+
+      String email = claims.getStringClaim("email");
+      String picture = claims.getStringClaim("picture");
+      String givenName = claims.getStringClaim("given_name");
+      String familyName = claims.getStringClaim("family_name");
+
+      if (email != null && email.contains("@")) {
+        log.info("Got user info from ID token header: email={}", email);
+        return new UserClaimFromAuth0(picture, email, familyName, givenName);
+      }
+    } catch (Exception e) {
+      log.error("Error parsing ID token from header", e);
+    }
+    return null;
   }
 
   User setUserActiveOrInactive(User user, Boolean isActive) {
