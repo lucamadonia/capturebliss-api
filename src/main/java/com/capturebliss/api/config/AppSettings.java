@@ -45,6 +45,32 @@ public class AppSettings {
     load();
   }
 
+  @SuppressWarnings("unchecked")
+  private Map<String, Object> getDefaultFeaturePlanMatrix() {
+    try {
+      String json = """
+        {
+          "modules":{"plans":[{"test":"switch","value":"true","plan":"*"}],"isInBeta":false,"requireAccess":false},
+          "no_of_demos":{"plans":[{"test":"count","value":"<=1000","plan":"*"}],"isInBeta":false,"requireAccess":false},
+          "aggregate_analytics":{"plans":[{"test":"switch","value":"true","plan":"*"}],"isInBeta":false,"requireAccess":false},
+          "custom_domain":{"plans":[{"test":"switch","value":"true","plan":"*"}],"isInBeta":false,"requireAccess":false},
+          "demo_hub":{"plans":[{"test":"switch","value":"true","plan":"*"}],"isInBeta":false,"requireAccess":false},
+          "no_watermark":{"plans":[{"test":"switch","value":"true","plan":"*"}],"isInBeta":false,"requireAccess":false},
+          "custom_demo_loader":{"plans":[{"test":"switch","value":"true","plan":"*"}],"isInBeta":false,"requireAccess":false},
+          "multi_annontation":{"plans":[{"test":"switch","value":"true","plan":"*"}],"isInBeta":false,"requireAccess":false},
+          "custom_lead_form":{"plans":[{"test":"switch","value":"true","plan":"*"}],"isInBeta":false,"requireAccess":false},
+          "no_of_creator":{"plans":[{"test":"count","value":"<=100","plan":"*"}],"isInBeta":false,"requireAccess":false},
+          "dataset":{"plans":[{"test":"switch","value":"true","plan":"*"}],"isInBeta":false,"requireAccess":false},
+          "integration":{"plans":[{"test":"text","value":["*"],"plan":"*"}],"isInBeta":false,"requireAccess":false}
+        }
+        """;
+      return mapper.readValue(json, new TypeReference<>() {});
+    } catch (Exception e) {
+      log.error("Failed to parse default feature plan matrix", e);
+      return new HashMap<>();
+    }
+  }
+
   private List<CustomDomainProxyCluster> parseCustomDomainClusterIdentifiers(String str) {
     String[] clusters = StringUtils.split(str, ';');
     ArrayList<CustomDomainProxyCluster> list = new ArrayList<>();
@@ -69,12 +95,20 @@ public class AppSettings {
     globalOpts = hm.getOrDefault("DEFAULT_GLOBAL_OPTS", null);
 
     try {
-      TypeReference<Map<String, Object>> typeRef = new TypeReference<>() {
-      };
-      featurePlanMatrix = mapper.readValue(hm.getOrDefault("FEATURE_PLAN_MATRIX", null), typeRef);
+      String featurePlanJson = hm.getOrDefault("FEATURE_PLAN_MATRIX", null);
+      if (featurePlanJson != null) {
+        TypeReference<Map<String, Object>> typeRef = new TypeReference<>() {
+        };
+        featurePlanMatrix = mapper.readValue(featurePlanJson, typeRef);
+      }
     } catch (Exception e) {
       log.error("Something went wrong with getting #featurePerPlan {}", e.getMessage());
       Sentry.captureException(e);
+    }
+
+    if (featurePlanMatrix == null) {
+      log.info("FEATURE_PLAN_MATRIX not found in settings, using default (all features enabled)");
+      featurePlanMatrix = getDefaultFeaturePlanMatrix();
     }
 
     // Turn this on when migration scripts are run and needs to access api for migration
