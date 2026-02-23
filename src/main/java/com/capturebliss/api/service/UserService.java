@@ -85,6 +85,19 @@ public class UserService {
   }
 
   private UserClaimFromAuth0 getUserClaimsFromUserInfoEndpoint(Jwt jwt) {
+    Map<String, Object> claims = jwt.getClaims();
+
+    // First: try standard JWT claims (some Auth0 configs include email in access token)
+    String email = claims.get("email") instanceof String e ? e : null;
+    if (email != null && email.contains("@")) {
+      String picture = claims.get("picture") instanceof String p ? p : null;
+      String givenName = claims.get("given_name") instanceof String g ? g : null;
+      String familyName = claims.get("family_name") instanceof String f ? f : null;
+      log.info("Got user info from standard JWT claims: email={}", email);
+      return new UserClaimFromAuth0(picture, email, familyName, givenName);
+    }
+
+    // Second: try /userinfo endpoint
     try {
       String userinfoUrl = issuerUri + (issuerUri.endsWith("/") ? "" : "/") + "userinfo";
       HttpClient client = HttpClient.newHttpClient();
@@ -96,19 +109,31 @@ public class UserService {
       HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
       if (response.statusCode() == 200) {
         Map<String, Object> userInfo = objectMapper.readValue(response.body(), Map.class);
-        String email = (String) userInfo.get("email");
+        email = (String) userInfo.get("email");
         String picture = (String) userInfo.get("picture");
         String givenName = (String) userInfo.get("given_name");
         String familyName = (String) userInfo.get("family_name");
         log.info("Got user info from userinfo endpoint: email={}", email);
         return new UserClaimFromAuth0(picture, email, familyName, givenName);
       } else {
-        log.error("Failed to get userinfo: status={}, body={}", response.statusCode(), response.body());
+        log.warn("Userinfo endpoint returned status={} (access tokens for custom APIs cannot call /userinfo)", response.statusCode());
       }
     } catch (Exception e) {
       log.error("Error calling userinfo endpoint", e);
     }
-    return new UserClaimFromAuth0(null, jwt.getSubject(), null, null);
+
+    // Third: check if sub looks like an email (e.g. passwordless or some social providers)
+    String sub = jwt.getSubject();
+    if (sub != null && sub.contains("@")) {
+      log.info("Using JWT subject as email: {}", sub);
+      return new UserClaimFromAuth0(null, sub, null, null);
+    }
+
+    // Cannot determine user email - throw clear error instead of using auth0|xxx as email
+    log.error("Cannot determine user email. Custom claim missing, /userinfo failed, sub={}. " +
+      "Ensure Auth0 Post-Login Action adds the custom claim to access tokens.", sub);
+    throw new ResponseStatusException(HttpStatus.UNAUTHORIZED,
+      "Cannot determine user identity. Please logout and login again.");
   }
 
   User setUserActiveOrInactive(User user, Boolean isActive) {
