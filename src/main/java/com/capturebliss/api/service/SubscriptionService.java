@@ -97,14 +97,26 @@ public class SubscriptionService {
 
     if (subs == null) {
       if (!paymentConfig.isConfigured()) {
-        log.info("Auto-creating local trial subscription for user {} (no subscription found, Chargebee not configured)", user.getEmail());
+        log.info("Auto-creating local subscription for user {} (no subscription found, Chargebee not configured)", user.getEmail());
         return newSubscription(
-          new ReqSubscriptionInfo(PaymentTerms.Plan.SOLO, PaymentTerms.Interval.YEARLY, null),
+          new ReqSubscriptionInfo(PaymentTerms.Plan.BUSINESS, PaymentTerms.Interval.YEARLY, null),
           user
         );
       }
       return null;
     }
+
+    // Auto-upgrade local subscriptions to BUSINESS when Chargebee is not configured
+    if (!paymentConfig.isConfigured() && subs.getPaymentPlan() == PaymentTerms.Plan.SOLO
+        && subs.getCbSubscriptionId() != null && subs.getCbSubscriptionId().startsWith("local-")) {
+      log.info("Auto-upgrading local subscription from SOLO to BUSINESS for user {}", user.getEmail());
+      subs.setPaymentPlan(PaymentTerms.Plan.BUSINESS);
+      subs.setPaymentPlanId(paymentConfig.getPlanId(PaymentTerms.Plan.BUSINESS, PaymentTerms.Interval.YEARLY));
+      subs.setPaymentInterval(PaymentTerms.Interval.YEARLY);
+      subs.setStatus(com.chargebee.models.Subscription.Status.ACTIVE);
+      repo.save(subs);
+    }
+
     return RespSubscription.from(subs, entityConfigKVS);
   }
 
@@ -185,17 +197,17 @@ public class SubscriptionService {
     }
 
     if (!paymentConfig.isConfigured()) {
-      // Chargebee not configured - create local trial subscription
-      log.info("Creating local trial subscription for user {} (Chargebee not configured)", user.getEmail());
+      // Chargebee not configured - create local active subscription
+      log.info("Creating local active subscription for user {} (Chargebee not configured)", user.getEmail());
       Subscription subs = Subscription.builder()
         .paymentPlanId(planId)
         .paymentPlan(info.pricingPlan())
         .paymentInterval(info.pricingInterval())
         .cbSubscriptionId("local-" + org.getId())
-        .trialEndsOn(java.sql.Timestamp.from(java.time.Instant.now().plus(java.time.Duration.ofDays(14))))
+        .trialEndsOn(java.sql.Timestamp.from(java.time.Instant.now().plus(java.time.Duration.ofDays(365))))
         .trialStartedOn(java.sql.Timestamp.from(java.time.Instant.now()))
         .managedBy(SubscriptionManagedBy.CHARGEBEE)
-        .status(com.chargebee.models.Subscription.Status.IN_TRIAL)
+        .status(com.chargebee.models.Subscription.Status.ACTIVE)
         .orgId(org.getId())
         .cbCustomerId("local-" + user.getId())
         .build();
