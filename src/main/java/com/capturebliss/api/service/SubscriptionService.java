@@ -370,6 +370,10 @@ public class SubscriptionService {
     }
     final int newSeatQuantity = orgService.getCountOfActiveUsersInOrg(orgId);
     Subscription subs = repo.getSubscriptionByOrgId(orgId);
+    if (subs == null) {
+      log.warn("No subscription found for org {} - skipping seat update", orgId);
+      return;
+    }
     String subsId = subs.getCbSubscriptionId();
     if (StringUtils.isBlank(subsId)) {
       log.error("Seat change requested but subscription id not found for org {}", orgId);
