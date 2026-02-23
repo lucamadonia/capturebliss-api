@@ -26,6 +26,7 @@ import java.net.http.HttpResponse;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 
 @Slf4j
@@ -49,14 +50,23 @@ public class UserService {
 
   // used from AuthUser annotation
   public User getOrCreateUserFromJwt(Jwt jwt) throws JsonProcessingException {
-    UserClaimFromAuth0 userClaimFromAuth0 = getUserClaimsFromAuth0(jwt);
     String subject = jwt.getSubject();
+
+    // Fast path: find existing user by auth ID (works even when custom JWT claim is missing)
+    Optional<User> existingUser = userRepo.findByAuthId(subject);
+    if (existingUser.isPresent()) {
+      User user = existingUser.get();
+      Long orgId = OrgContext.getCurrentOrgId();
+      User updatedUser = setLatestOrgForUser(user, orgId);
+      return setUserActiveOrInactive(updatedUser, true);
+    }
+
+    // New user: need claims for creation (email, name, picture)
+    UserClaimFromAuth0 userClaimFromAuth0 = getUserClaimsFromAuth0(jwt);
     User user = userRepo.findUserByEmail(userClaimFromAuth0.email())
       .orElseGet(() -> createNewUser(userClaimFromAuth0, subject));
 
     if (!StringUtils.equalsIgnoreCase(user.getAuthId(), subject)) {
-      // If user has logged in using one auth provider (google) and tries to login using another login
-      // provider (email<>password) ask user to login using existing auth
       log.error("{} is trying to login using subject {} but subject already exists {}",
         user.getEmail(), user.getAuthId(), subject);
       throw new ResponseStatusException(HttpStatus.FORBIDDEN, objectMapper.writeValueAsString(
@@ -66,10 +76,6 @@ public class UserService {
 
     Long orgId = OrgContext.getCurrentOrgId();
     User updatedUser = setLatestOrgForUser(user, orgId);
-
-    // If the user is deactivated any new auth attempt would mark the user as active.
-    // This is not ideal but for the timebeing this would do.
-    // Ideally any nonactive user has zero role based permission.
     return setUserActiveOrInactive(updatedUser, true);
   }
 
